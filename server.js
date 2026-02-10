@@ -47,9 +47,13 @@ server.delete("/videos/:id", async (request, reply) => {
   return reply.status(204).send();
 });
 
-// server.listen({ port: 3333 });
+const port = Number(process.env.PORT) || 3333;
+const host = '0.0.0.0'; // required for Render.com (must listen on all interfaces)
 
-server.listen({
-  host: '0.0.0.0',
-  port: process.env.PORT || 3333
+server.listen({ host, port }, (err) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  console.log(`Server listening at http://${host}:${port}`);
 });
