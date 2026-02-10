@@ -110,18 +110,6 @@ Isso permite:
 
 ---
 
-## Próximas Evoluções Sugeridas
-
-- Validação com Zod ou Yup
-- Schema validation do Fastify
-- Logger estruturado
-- Testes com Vitest
-- Docker + docker-compose
-- Migrations versionadas
-- Camada de services
-- DTOs e tipagem com TypeScript
-
----
 
 ## Licença
 
