@@ -1,5 +1,7 @@
 # Node.js API — Fastify + PostgreSQL
 
+**Endpoint (produção):** https://api-videos-lmft.onrender.com
+
 API REST desenvolvida com Node.js e Fastify, com camada de persistência desacoplada e suporte a:
 
 - PostgreSQL
@@ -81,6 +83,58 @@ Ideal para:
 - Testes rápidos
 - Desenvolvimento local
 - Ambiente sem dependência externa
+
+---
+
+## Endpoints da API
+
+**URL oficial (produção):** [https://api-videos-lmft.onrender.com](https://api-videos-lmft.onrender.com)
+
+**Local:** `http://localhost:3333`
+
+| Método | Endpoint | Descrição |
+|--------|----------|-----------|
+| `POST` | `/videos` | Cria um novo vídeo |
+| `GET` | `/videos` | Lista todos os vídeos (opcional: `?search=termo`) |
+| `PUT` | `/videos/:id` | Atualiza um vídeo pelo ID |
+| `DELETE` | `/videos/:id` | Remove um vídeo pelo ID |
+
+### Exemplos
+
+**Criar vídeo** — `POST /videos`
+
+```json
+{
+  "title": "Video node",
+  "description": "Video 1 description",
+  "duration": 100
+}
+```
+
+- **Resposta:** `201 Created` (sem corpo).
+
+**Listar vídeos** — `GET /videos`
+
+- Query opcional: `?search=termo` para filtrar por título/descrição.
+- **Resposta:** `200 OK` com array de vídeos.
+
+**Atualizar vídeo** — `PUT /videos/:id`
+
+```json
+{
+  "title": "Video 2",
+  "description": "Video 13 description",
+  "duration": 100
+}
+```
+
+- **Resposta:** `204 No Content`.
+
+**Deletar vídeo** — `DELETE /videos/:id`
+
+- **Resposta:** `204 No Content`.
+
+> O arquivo `routes.http` contém exemplos prontos para testar no VS Code/Cursor (extensão REST Client).
 
 ---
 
