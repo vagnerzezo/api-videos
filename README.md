@@ -1,68 +1,125 @@
-# Node.js — Curso
+# Node.js API — Fastify + PostgreSQL
 
-Repositório de estudos e exercícios de **Node.js**, organizado em módulos.
+API REST desenvolvida com Node.js e Fastify, com camada de persistência desacoplada e suporte a:
 
-## Estrutura
+- PostgreSQL
+- Banco em memória (para desenvolvimento e testes)
 
-| Pasta | Descrição | Stack |
-|-------|-----------|--------|
-| **01** | Introdução e APIs com Express | Express 5, Joi (validação), ES modules |
-| **02 - Rocketseat** | API com Fastify e banco de dados | Fastify 5, Postgres, dotenv |
+O projeto foi estruturado com foco em clareza arquitetural, separação de responsabilidades e extensibilidade.
 
 ---
 
-## Módulo 01
+## Stack
 
-API com **Express** e validação com **Joi**.
+- Node.js (ES Modules)
+- Fastify
+- PostgreSQL
+- Arquitetura modular
+- Injeção simples de dependência para camada de dados
 
-### Como rodar
+---
 
-```bash
-cd 01
-npm install
-node app.js
+## Estrutura do Projeto
+
+```
+api-videos/
+├── server.js              # Inicialização e configuração do Fastify
+├── db.js                  # Seleção da implementação de banco
+├── database-postgres.js   # Implementação com PostgreSQL
+├── database-memory.js     # Implementação em memória
+├── create-table.js        # Script de criação da tabela
+├── routes.http            # Exemplos de requisições HTTP
+└── package.json
 ```
 
-### Principais arquivos
+---
 
-- `app.js` — servidor Express
-- `validacao.js` — validação com Joi
-- `tabela.js` — lógica de tabela/dados
+## Instalação
+
+```bash
+cd api-videos
+npm install
+```
 
 ---
 
-## Módulo 02 - Rocketseat
+## Execução
 
-API com **Fastify** e persistência em **PostgreSQL** (ou banco em memória).
-
-### Como rodar
+**Ambiente de Desenvolvimento (watch mode)**
 
 ```bash
-cd "02 - Rocketseat"
-npm install
 npm run dev
 ```
 
-### Scripts
+**Execução padrão**
 
-- `npm start` — inicia o servidor
-- `npm run dev` — inicia com `--watch` para recarregar ao editar
+```bash
+npm start
+```
 
-### Principais arquivos
+---
 
-- `server.js` — servidor Fastify
-- `db.js` — configuração do banco
-- `database-postgres.js` — implementação com Postgres
-- `database-memory.js` — implementação em memória
-- `create-table.js` — criação de tabelas
-- `routes.http` — exemplos de requisições HTTP
+## Banco de Dados
+
+### Usando PostgreSQL
+
+1. Configure a conexão no arquivo correspondente.
+2. Crie a tabela:
+
+```bash
+node create-table.js
+```
+
+3. Inicie a aplicação.
+
+### Usando Banco em Memória
+
+A troca da implementação é feita no arquivo **`db.js`**.
+
+Ideal para:
+
+- Testes rápidos
+- Desenvolvimento local
+- Ambiente sem dependência externa
+
+---
+
+## Arquitetura
+
+O projeto segue um modelo simples e escalável:
+
+- `server.js` → configuração da aplicação
+- `db.js` → abstração da camada de persistência
+- `database-*` → implementações concretas
+- Separação clara entre lógica HTTP e dados
+
+Isso permite:
+
+- Trocar facilmente o banco
+- Evoluir para padrão Repository
+- Adicionar validação e middlewares
+- Implementar autenticação
+- Integrar testes automatizados
 
 ---
 
 ## Requisitos
 
-- **Node.js** (versão compatível com ES modules)
-- Para o módulo 02: **PostgreSQL** (se for usar o banco real)
+- Node.js (versão com suporte a ES Modules)
+- PostgreSQL (opcional)
+
+---
+
+## Próximas Evoluções Sugeridas
+
+- Validação com Zod ou Yup
+- Schema validation do Fastify
+- Logger estruturado
+- Testes com Vitest
+- Docker + docker-compose
+- Migrations versionadas
+- Camada de services
+- DTOs e tipagem com TypeScript
 
 ---
 
